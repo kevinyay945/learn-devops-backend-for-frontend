@@ -1,7 +1,7 @@
 .PHONY: build-image push-image
 
 SERVER  =ghcr.io/
-REPO    ?=kevinyay945/backend-for-frontend# Replace with your GitHub username
+REPO    ?=kevinyay945/learn-devops-backend-for-frontend
 COMMIT  =${shell git rev-parse --short HEAD}
 LOG     ="${shell git log -1 --pretty=%B}"
 VERSION ?=${COMMIT}
