@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Backend For Frontend (BFF) with Next.js
+
+This project is a Backend For Frontend (BFF) application built using Next.js. It demonstrates how to set up a Next.js project with TypeScript, ESLint, Tailwind CSS, and the App Router.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (v22.15.1 or later)
+- pnpm
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <your-repository-url>
+   cd backend-for-frontend
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   pnpm install
+   ```
+
+### Environment Variables
+
+Create a `.env.local` file in the root of the project based on `.env.example`:
+
+```
+NEXT_PUBLIC_CURR_ENV_FRONTEND=Your frontend environment variable value
+CURR_ENV_BACKEND=Your backend environment variable value
+```
+
+- `NEXT_PUBLIC_CURR_ENV_FRONTEND`: This variable is accessible on the client-side (browser).
+- `CURR_ENV_BACKEND`: This variable is only accessible on the server-side.
+
+### Running the Development Server
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Building for Production
 
-## Learn More
+```bash
+pnpm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+This command builds the application for production to the `.next` folder.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Running in Production
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm run start
+```
 
-## Deploy on Vercel
+## Docker
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Build the Docker Image
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To build the Docker image, use the following command:
+
+```bash
+docker build -t backend-for-frontend .
+```
+
+#### Setting Custom Environment Variables during Build
+
+You can set custom values for `NEXT_PUBLIC_CURR_ENV_FRONTEND` and `CURR_ENV_BACKEND` during the Docker image build process using the `--build-arg` flag. If not provided, default values will be used.
+
+```bash
+docker build \
+  --build-arg NEXT_PUBLIC_CURR_ENV_FRONTEND="Your custom frontend value" \
+  --build-arg CURR_ENV_BACKEND="Your custom backend value" \
+  -t backend-for-frontend .
+```
+
+
+### Run the Docker Container
+
+```bash
+docker run -p 3000:3000 backend-for-frontend
+```
+
+## Makefile
+
+This project includes a `Makefile` for common tasks.
+
+- `make build-image`: Builds the Docker image.
+- `make push-image`: Pushes the Docker image to a registry (requires `DOCKER_USERNAME` and `DOCKER_REPO` to be set).

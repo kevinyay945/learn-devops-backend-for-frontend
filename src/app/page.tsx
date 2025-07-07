@@ -23,6 +23,12 @@ export default function Home() {
           <li className="tracking-[-.01em]">
             Save and see your changes instantly.
           </li>
+          <li className="tracking-[-.01em]">
+            Frontend Environment Variable: {process.env.NEXT_PUBLIC_CURR_ENV_FRONTEND}
+          </li>
+          <li className="tracking-[-.01em]">
+            Backend Environment Variable: {process.env.CURR_ENV_BACKEND}
+          </li>
         </ol>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
